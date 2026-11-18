@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   YD Salon design system
+   Warm neutrals · champagne & gold accents · editorial serif + clean sans
+   Per-salon brand overrides: --brand-accent / --brand-ink via inline style.
+   ========================================================================== */
+@theme {
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-manrope), "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ivory: #fbf8f3;
+  --color-porcelain: #fffdf9;
+  --color-cream: #f4ede3;
+  --color-sand: #e9ddcb;
+  --color-line: #e6dacb;
+  --color-champagne: #d8c3a0;
+  --color-gold: #b08d57;
+  --color-gold-dark: #8c6c3d;
+  --color-mocha: #7a5e48;
+  --color-taupe: #9a8676;
+  --color-espresso: #2a211c;
+  --color-ink: #1a1512;
+  --color-success: #4f7a5a;
+  --color-danger: #a4473b;
+  --color-warning: #b07a2a;
+  --color-chart: #a8742a; /* validated: lightness, chroma, contrast vs porcelain */
+
+  --radius-card: 1.25rem;
+  --shadow-soft: 0 1px 2px rgb(42 33 28 / 0.04), 0 8px 24px -12px rgb(42 33 28 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(42 33 28 / 0.04), 0 24px 48px -20px rgb(42 33 28 / 0.25);
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.6s ease-out both;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-ivory text-espresso font-sans;
+  }
+  ::selection {
+    background: var(--color-champagne);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-lux {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-dark;
+  }
+  .heading-xl {
+    @apply font-display text-[2.75rem] leading-[1.02] font-medium tracking-[-0.01em] sm:text-6xl lg:text-7xl;
+  }
+  .heading-lg {
+    @apply font-display text-4xl leading-[1.08] font-medium sm:text-5xl;
+  }
+  .heading-md {
+    @apply font-display text-2xl leading-tight font-medium sm:text-3xl;
+  }
+  .btn,
+  .btn-primary,
+  .btn-gold,
+  .btn-outline,
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply bg-espresso text-porcelain hover:bg-ink hover:shadow-lift active:scale-[0.98];
+  }
+  .btn-gold {
+    @apply bg-gold text-porcelain hover:bg-gold-dark hover:shadow-lift active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply border border-espresso/20 text-espresso hover:border-espresso hover:bg-espresso hover:text-porcelain;
+  }
+  .btn-ghost-light {
+    @apply border border-porcelain/40 text-porcelain backdrop-blur-sm hover:bg-porcelain hover:text-espresso;
+  }
+  .card {
+    @apply rounded-[var(--radius-card)] border border-line bg-porcelain shadow-soft;
+  }
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100;
+  }
+  .img-placeholder {
+    background: linear-gradient(135deg, #efe4d4 0%, #e3d2b9 55%, #d8c3a0 100%);
+  }
+
+  /* Form controls (site + dashboard) */
+  .field-label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-[0.12em] text-mocha;
+  }
+  .input {
+    @apply w-full rounded-xl border border-line bg-porcelain px-4 py-3 text-[15px] text-espresso placeholder:text-taupe/70 transition focus:border-gold focus:ring-4 focus:ring-champagne/30 focus:outline-none;
+  }
+  .input-sm {
+    @apply w-full rounded-lg border border-line bg-porcelain px-3 py-2 text-sm text-espresso placeholder:text-taupe/70 transition focus:border-gold focus:ring-2 focus:ring-champagne/30 focus:outline-none;
+  }
+  .checkbox {
+    @apply size-4 rounded border-line accent-[var(--color-gold-dark)];
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
