@@ -11,7 +11,9 @@ function createClient() {
   const isLocal = /localhost|127\.0\.0\.1/.test(url);
   return postgres(url, {
     max: Number(process.env.DB_POOL_MAX ?? 5),
-    idle_timeout: 20,
+    idle_timeout: 10,
+    connect_timeout: 10, // fail fast instead of hanging until the platform timeout
+    max_lifetime: 60 * 5,
     // Supabase's transaction pooler (port 6543) does not support prepared statements
     prepare: false,
     ssl: isLocal ? false : "require",
