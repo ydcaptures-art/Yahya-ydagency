@@ -12,6 +12,8 @@ function createClient() {
   return postgres(url, {
     max: Number(process.env.DB_POOL_MAX ?? 5),
     idle_timeout: 10,
+    // Supabase's transaction pooler hangs when queries are pipelined on one connection
+    max_pipeline: 1,
     connect_timeout: 10, // fail fast instead of hanging until the platform timeout
     max_lifetime: 60 * 5,
     // Supabase's transaction pooler (port 6543) does not support prepared statements

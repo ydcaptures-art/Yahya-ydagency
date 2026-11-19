@@ -35,5 +35,6 @@ export async function GET() {
   await run("ungranted_locks", async () => (await sql`select count(*)::int as n from pg_locks where not granted`)[0]);
   await run("statement_timeout", async () => (await sql`show statement_timeout`)[0]);
   await run("parallel3", async () => Promise.all([sql`select 1`, sql`select 2`, sql`select 3`]).then((r) => r.length));
+  await run("parallel12", async () => Promise.all(Array.from({ length: 12 }, (_, i) => sql`select ${i}::int as i`)).then((r) => r.length));
   return NextResponse.json({ region: process.env.VERCEL_REGION, node: process.version, pool: process.env.DB_POOL_MAX, steps });
 }
