@@ -13,6 +13,7 @@ declare
   q text := '?auto=format&fit=crop&w=1200&q=80';
   r record;
 begin
+  delete from users where salon_id in (select id from salons where slug = 'maison-aurelle');
   delete from appointments where salon_id in (select id from salons where slug = 'maison-aurelle');
   delete from customers where salon_id in (select id from salons where slug = 'maison-aurelle');
   delete from employees where salon_id in (select id from salons where slug = 'maison-aurelle');

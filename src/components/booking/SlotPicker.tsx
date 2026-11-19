@@ -150,7 +150,7 @@ export function SlotPicker({ locale, t, daysShort, query, today, maxAdvanceDays,
                   onSelect(null);
                 }}
                 aria-pressed={isActive}
-                aria-label={key}
+                aria-label={new Intl.DateTimeFormat(localeTags[locale], { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(new Date(key + "T12:00:00Z"))}
                 className={clsx(
                   "relative flex aspect-square items-center justify-center rounded-full text-sm tabular-nums transition",
                   isActive && "bg-espresso font-semibold text-porcelain",

@@ -53,7 +53,7 @@ Requirements: Node 20+, a PostgreSQL 15+ database (a Supabase project or local P
 npm install
 cp .env.example .env.local        # set DATABASE_URL at minimum
 npm run db:migrate                # create schema
-npm run db:seed                   # demo salon "Maison Aurelle" (re-running resets the demo tenant, including its users)
+npm run db:seed                   # demo salon "Maison Aurelle" (re-running resets the demo tenant, including its dashboard users; recreate them afterwards)
 npm run user:create -- --email you@salon.com --name "Your Name" --role owner
 npm run dev                       # http://localhost:3000  ·  dashboard: /admin
 ```
